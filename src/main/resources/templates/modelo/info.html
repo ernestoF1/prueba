@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+
+		<h1>Informacion de Modelo</h1>
+
+		<div class="card text-center">
+			<div class="card-header">Informacion de Modelo</div>
+			<div class="card-body">
+
+				<div th:if="${dangerDel}" class="alert alert-danger" role="alert">
+					<span th:text="${dangerDel}"></span>
+				</div>
+
+
+				<form>
+					<div class="form-group row">
+						<label for="nombreModelo" class="col-sm-2 col-form-label">Nombre
+							de Modelo :</label>
+						<div class="col-sm-10">
+							<input type="text" readonly th:value="${modelo.nombreModelo}"
+								class="form-control-plaintext">
+						</div>
+					</div>
+
+
+				</form>
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Codigo</th>
+							<th scope="col">Precio</th>
+							<th scope="col">Stock</th>
+							<th scope="col">Descripcion</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody th:each="producto: ${modelo.productos}">
+						<tr>
+							<th scope="row" th:text="${producto.codigo}">1</th>
+							<td th:text="${producto.precio}">Mark</td>
+							<td th:text="${producto.stock}">Otto</td>
+							<td th:text="${producto.desripcion}">@mdo</td>
+
+							<td>
+							<a th:href="@{ '/producto/edit/' + ${producto.codigo} }"
+								class="btn btn-warning"> <i class="fas fa-edit"></i>
+							</a> <a th:href="@{ '/producto/del/' + ${producto.codigo} }"
+								class="btn btn-danger"> <i class="fas fa-trash-alt"></i>
+							</a>
+							</td>
+
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+			<div class="card-footer text-muted">
+				<a th:href="@{/modelo}" class="btn btn-success"><i
+					class="fas fa-file-alt"></i> Ver Modelos</a>
+					<a th:href="@{'/modelo/' + ${modelo.codigo} + '/nuevoproducto/'}" 
+					class="btn btn-primary">
+					<i class="fas fa-file-alt"></i> Nuevo producto</a>
+
+			</div>
+		</div>
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
